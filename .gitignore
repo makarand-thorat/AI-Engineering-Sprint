@@ -1,0 +1,12 @@
+# Secret Keys
+.env
+
+# Virtual Environment (Thousands of files you don't need to upload)
+venv/
+
+# Python Cache (Temporary files)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+

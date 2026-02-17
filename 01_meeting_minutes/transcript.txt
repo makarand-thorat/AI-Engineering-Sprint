@@ -1,0 +1,12 @@
+[00:00:05] John: Hey everyone, thanks for joining. Did everyone see the game last night? Crazy ending.
+[00:00:12] Alice: I missed it, stayed up late working on the header design. It’s almost done, by the way.
+[00:00:18] John: Nice. Okay, let's dive in. We need to finalize the Q3 launch plan. 
+[00:00:25] Bob: Wait, are we still using the old logo or the one Alice just finished?
+[00:00:30] Alice: Use the new one. John, you were going to handle the website deployment, right?
+[00:00:35] John: Yeah, I'll get the site live by Friday. Put that down as High priority. I’m a bit worried about the server lag though.
+[00:00:42] Bob: I can look into the server stuff. I'll run some stress tests tomorrow. 
+[00:00:48] Alice: Thanks Bob. I also need to finish the marketing graphics. I should have those to the team by Wednesday.
+[00:00:55] John: Sounds good. Is there anything else? 
+[00:01:00] Bob: Just that we’re still waiting on the legal team for the privacy policy. It’s a bit of a headache.
+[00:01:05] John: Okay, I’ll ping Sarah from Legal to see where that’s at. Anyway, let’s wrap this up, I have another call.
+[00:01:12] Alice: Cool, see you guys.
