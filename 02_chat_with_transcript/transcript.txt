@@ -1,0 +1,23 @@
+[00:00:00] John: Hey everyone, thanks for joining. Did everyone see the game last night? Crazy ending.
+[00:00:12] Alice: I missed it, stayed up late working on the header design. It’s almost done, by the way.
+[00:00:18] John: Nice. Okay, let's dive in. We need to finalize the Q3 launch plan. 
+[00:00:25] Bob: Wait, are we still using the old logo or the one Alice just finished?
+[00:00:30] Alice: Use the new one. John, you were going to handle the website deployment, right?
+[00:00:35] John: Yeah, I'll get the site live by Friday. Put that down as High priority. I’m a bit worried about the server lag though.
+[00:00:42] Bob: I can look into the server stuff. I'll run some stress tests tomorrow. 
+[00:01:15] John: Bob, while you're at it, can you check the API documentation for the payment gateway?
+[00:01:22] Bob: Sure, but last I checked, they were updating their SDK to version 3.2. We might need to rewrite our integration.
+[00:01:30] Alice: That sounds like it could delay the graphics launch. If the integration changes, the UI components for the checkout page will need a complete overhaul. 
+[00:01:45] John: Let's not panic yet. Bob, prioritize the stress tests first. If the servers can't handle the load, the SDK version won't even matter.
+[00:02:10] Alice: Regarding the marketing graphics, I'm using the brand-new "Electric Blue" palette. I should have those to the team by Wednesday afternoon.
+[00:02:30] Bob: I like that color. By the way, the budget for the server upgrade was approved, right? We're looking at about $500 a month for the new AWS instances.
+[00:02:45] John: Yes, approved. I checked with the finance lead, Mike, yesterday.
+[00:03:15] Bob: Good. One more thing—the mobile app team is asking for the JSON schema for the user profiles.
+[00:03:22] John: Tell them it's the same as the web version. No changes there.
+[00:03:50] Alice: I also need to finish the marketing graphics. I should have those to the team by Wednesday.
+[00:04:10] Bob: Just that we’re still waiting on the legal team for the privacy policy. It’s a bit of a headache. They mentioned something about GDPR compliance in Denmark specifically.
+[00:04:25] John: Okay, I’ll ping Sarah from Legal to see where that’s at. She's usually fast, but they are swamped with the new terms of service updates.
+[00:04:40] Bob: Also, the office coffee machine is broken again. 
+[00:04:45] Alice: Priority zero, Bob. Priority zero.
+[00:05:00] John: Anyway, let’s wrap this up, I have another call. See you guys.
+[00:05:12] Alice: Cool, see you guys.

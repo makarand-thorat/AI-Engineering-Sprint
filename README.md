@@ -1,18 +1,34 @@
-Set-Content -Path "README.md" -Value @"
-# 🤖 AI Meeting Minutes Extractor
+# 🚀 30-Day AI Engineering Sprint
 
-Part of the **AI Engineering Sprint 2026**. This tool leverages the **Gemini 3 Flash** model to transform raw, unstructured meeting transcripts into high-quality, structured JSON data.
+This repository documents my journey through the **AI Engineering Sprint 2026**, moving from basic LLM calls to complex, production-ready AI agents.
 
-## 🌟 Key Features
-- **Structured Extraction:** Uses Instructor and Pydantic to force LLM output into a strict, predictable JSON schema.
-- **Action Item Tracking:** Automatically identifies tasks, assigns owners, and categorizes priority levels.
-- **Sentiment Analysis:** Detects the meeting's emotional tone and overall mood.
-- **Secure by Design:** Implements industry-standard .env environment variables.
+---
 
-## 🛠 Tech Stack
-- **Language:** Python 3.9+
-- **LLM API:** Google Gemini 3 Flash
-- **AI Orchestration:** Instructor
+## 🛠 Global Tech Stack
+- **Language:** Python 3.13
+- **Model:** Google Gemini 2.0 Flash (via `google-genai`)
+- **Environment Management:** Virtual Environments (`venv`) & `python-dotenv`
+
+---
+
+## 📅 Day 1: Structured Meeting Extraction
+**Goal:** Transform messy transcripts into machine-readable data.
+
+- **Folder:** `/01_meeting_extractor`
+- **Core Concept:** Using **Pydantic** and **Instructor** to enforce a schema on LLM outputs.
+- **Outcome:** Extracts tasks, owners, priorities, and meeting sentiment into a structured JSON format.
+
+## 📅 Day 2: RAG-Based Transcript Chatbot
+**Goal:** Chat with long documents without hitting context limits.
+
+- **Folder:** `/02_chat_with_transcript`
+- **Core Concept:** **Retrieval-Augmented Generation (RAG)**.
+- **Key Features:**
+  - **Recursive Chunking:** Splitting text into overlapping segments using `langchain-text-splitters`.
+  - **Contextual Retrieval:** A keyword-based search engine to find the most relevant transcript part for a user's question.
+  - **Grounded Responses:** The AI is instructed to answer *only* based on the provided transcript chunks, reducing hallucinations.
+
+---
 
 ## 🚀 Getting Started
 
