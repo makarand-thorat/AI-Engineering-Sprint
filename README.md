@@ -6,7 +6,7 @@ This repository documents my journey through the **AI Engineering Sprint 2026**,
 
 ## 🛠 Global Tech Stack
 - **Language:** Python 3.13
-- **Model:** Google Gemini 2.0 Flash (via `google-genai`)
+- **Model:** Google Gemini 3.0 Flash (via `google-genai`)
 - **Environment Management:** Virtual Environments (`venv`) & `python-dotenv`
 
 ---
