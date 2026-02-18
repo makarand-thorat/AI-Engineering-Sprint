@@ -32,10 +32,14 @@ This repository documents my journey through the **AI Engineering Sprint 2026**,
 
 ## 🚀 Getting Started
 
-### 1. Installation
-\`\`\`powershell
-pip install instructor pydantic google-genai python-dotenv
-\`\`\`
+### 1. Setup Environment
+```powershell
+# Create and activate venv
+python -m venv venv
+.\venv\Scripts\activate
+
+# Install all dependencies
+pip install instructor pydantic google-genai python-dotenv langchain-text-splitters
 
 ### 2. Configuration
 Create a \`.env\` file and add:
