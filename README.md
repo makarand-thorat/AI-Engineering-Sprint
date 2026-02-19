@@ -28,6 +28,16 @@ This repository documents my journey through the **AI Engineering Sprint 2026**,
   - **Contextual Retrieval:** A keyword-based search engine to find the most relevant transcript part for a user's question.
   - **Grounded Responses:** The AI is instructed to answer *only* based on the provided transcript chunks, reducing hallucinations.
 
+## 📅 Day 3: Multimodal Audio Intelligence
+**Goal:** Transition from text-based processing to native audio "listening" and analysis.
+
+- **Folder:** `/03_audio_processor`
+- **Core Concept:** **Native Multimodality**. Instead of using a separate Speech-to-Text (STT) model, we leverage Gemini’s ability to process raw audio waves directly for better context and tone detection.
+- **Key Features:**
+  - **Asynchronous File Handling:** Implementing a state-check loop to manage the `PROCESSING` status of large media files in the Google File API.
+  - **Automated Speaker Diarization:** Identifying and labeling different speakers (Speaker 1, Speaker 2) based on vocal characteristics.
+  - **Temporal Logic:** Generating precise `[MM:SS]` timestamps linked to specific transcript segments.
+  - **Act
 ---
 
 Developed by **Makarand Thorat**
