@@ -37,7 +37,7 @@ This repository documents my journey through the **AI Engineering Sprint 2026**,
   - **Asynchronous File Handling:** Implementing a state-check loop to manage the `PROCESSING` status of large media files in the Google File API.
   - **Automated Speaker Diarization:** Identifying and labeling different speakers (Speaker 1, Speaker 2) based on vocal characteristics.
   - **Temporal Logic:** Generating precise `[MM:SS]` timestamps linked to specific transcript segments.
-  - **Act
+  
 ---
 
 Developed by **Makarand Thorat**
