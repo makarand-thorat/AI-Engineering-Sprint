@@ -38,6 +38,20 @@ This repository documents my journey through the **AI Engineering Sprint 2026**,
   - **Automated Speaker Diarization:** Identifying and labeling different speakers (Speaker 1, Speaker 2) based on vocal characteristics.
   - **Temporal Logic:** Generating precise `[MM:SS]` timestamps linked to specific transcript segments.
   
+## 📅 Day 4: Agentic Foundations (Combined Milestone)
+**Goal:** Merge Function Calling, MCP Standards, and ReAct Reasoning into a single autonomous agent.
+
+- **Folder:** `/04_agentic_foundations`
+- **Core Concepts:**
+  - **Function Calling:** Defined local Python tools that the model can trigger to interact with the real world.
+  - **MCP (Model Context Protocol):** Designed standardized tool interfaces to allow for clean, interoperable data exchange between the AI and backend.
+  - **ReAct Pattern:** Implemented the `Thought -> Action -> Observation` loop, ensuring the model reasons through complex, multi-step tasks before answering.
+
+### 🧠 Logic Flow:
+1. **Thought:** AI identifies that it needs stock data and shipping times.
+2. **Action:** AI triggers `get_product_inventory` and `calculate_shipping_time`.
+3. **Observation:** AI sees that Monitors are out of stock (0) and shipping to Dublin takes 3 days.
+4. **Final Answer:** AI informs the user about the laptop and the monitor shortage specifically.
 ---
 
 Developed by **Makarand Thorat**
