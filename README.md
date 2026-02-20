@@ -57,9 +57,8 @@ This repository documents my journey through the **AI Engineering Sprint 2026**,
 
 **Goal:** Bridge the gap between temporary chat context and permanent episodic recall by implementing a tiered memory architecture.
 
----
 
-## 🛠️ Technical Implementation
+### 🛠️ Technical Implementation
 
 This milestone demonstrates two distinct "temporal" layers of an AI brain:
 
@@ -75,9 +74,7 @@ This milestone demonstrates two distinct "temporal" layers of an AI brain:
     * `search_diary`: Enables the agent to perform targeted keyword searches over past interactions.
 * **Advantage:** By using **Selective Recall**, we avoid "context stuffing." The agent only retrieves relevant memories, saving tokens and maintaining high reasoning quality.
 
----
-
-## 🚀 Key Achievements
+### 🚀 Key Achievements
 - **Persistence:** The agent now remembers user preferences (like names, project goals, or travel plans) even after the script is restarted.
 - **Autonomous Decision Making:** The agent decides *what* is worth remembering and *when* it needs to search its past.
 - **Scalable Architecture:** Laid the foundation for Semantic Search (Day 6) by separating storage from retrieval logic.
