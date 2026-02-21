@@ -78,6 +78,33 @@ This milestone demonstrates two distinct "temporal" layers of an AI brain:
 - **Persistence:** The agent now remembers user preferences (like names, project goals, or travel plans) even after the script is restarted.
 - **Autonomous Decision Making:** The agent decides *what* is worth remembering and *when* it needs to search its past.
 - **Scalable Architecture:** Laid the foundation for Semantic Search (Day 6) by separating storage from retrieval logic.
+
+## Day 6: The Deep Researcher Agent 🕵️‍♂️
+
+**Goal:** Build a production-grade RAG (Retrieval-Augmented Generation) system that autonomously ingests web data, stores it in a vector database, and synthesizes it with live system status.
+
+---
+
+### 🏗️ System Architecture
+
+This project implements a "Full-Stack" Agentic workflow involving three core layers:
+
+### 1. The Ingestion Layer (`trafilatura`)
+- **Main Content Extraction:** Uses `trafilatura` to strip away "web noise" (HTML boilerplate, ads, navbars) to ensure only high-signal text is fed to the model.
+- **Semantic Chunking:** Documents are split by paragraph boundaries (`\n\n`) to preserve the semantic integrity of the information.
+
+### 2. The Semantic Memory (`ChromaDB` + `text-embedding-004`)
+- **Vector Embeddings:** Text chunks are converted into 768-dimensional vectors using Google's `text-embedding-004`.
+- **Persistent Storage:** Utilizes a local `chromadb` instance, allowing the agent to retain "learned" knowledge indefinitely across script restarts.
+- **Vector Search:** Enables the agent to find information based on **conceptual meaning** rather than literal keyword matches.
+
+### 3. The Reasoning Engine (Gemini 3.0 Flash)
+- **Multi-Tool Synthesis:** The agent can autonomously decide to:
+    1. Scrape a new URL to update its knowledge.
+    2. Search the existing vector database for historical context.
+    3. Query a live "System Status" function to compare research with real-time reality.
+
+
 ---
 
 Developed by **Makarand Thorat**
