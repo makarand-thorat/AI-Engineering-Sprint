@@ -53,7 +53,7 @@ This repository documents my journey through the **AI Engineering Sprint 2026**,
 3. **Observation:** AI sees that Monitors are out of stock (0) and shipping to Dublin takes 3 days.
 4. **Final Answer:** AI informs the user about the laptop and the monitor shortage specifically.
 
-## Day 5: Multi-Tiered Agent Memory 🧠
+## 📅 Day 5: Multi-Tiered Agent Memory 🧠
 
 **Goal:** Bridge the gap between temporary chat context and permanent episodic recall by implementing a tiered memory architecture.
 
@@ -79,7 +79,7 @@ This milestone demonstrates two distinct "temporal" layers of an AI brain:
 - **Autonomous Decision Making:** The agent decides *what* is worth remembering and *when* it needs to search its past.
 - **Scalable Architecture:** Laid the foundation for Semantic Search (Day 6) by separating storage from retrieval logic.
 
-## Day 6: The Deep Researcher Agent 🕵️‍♂️
+## 📅 Day 6: The Deep Researcher Agent 🕵️‍♂️
 
 **Goal:** Build a production-grade RAG (Retrieval-Augmented Generation) system that autonomously ingests web data, stores it in a vector database, and synthesizes it with live system status.
 
@@ -104,6 +104,31 @@ This project implements a "Full-Stack" Agentic workflow involving three core lay
     2. Search the existing vector database for historical context.
     3. Query a live "System Status" function to compare research with real-time reality.
 
+## 📅 Day 7: Reflexive Knowledge Loops & Self-Correction 
+
+**Goal:** Advance from "Simple RAG" to "Agentic RAG" by implementing a self-critique loop that identifies information gaps and corrects hallucinations before responding.
+
+---
+
+### 🧠 The Concept: Reflection Pattern
+In Day 6, the agent blindly trusted its first search result. In Day 7, we introduced **Cognitive Reflection**. The agent now follows an internal "Standard Operating Procedure" (SOP):
+1. **Detect Gaps:** Evaluates if the current memory (Vector DB) is sufficient.
+2. **Autonomous Research:** Triggers the scraper if more data is required.
+3. **Draft & Critique:** Writes a response, then "proofreads" it against the source text to catch errors (like temporal contradictions).
+
+
+### 🚀 Key Implementation: The Master System Prompt
+The core of Day 7 is moving logic out of Python loops and into the **System Instruction**. This allows the model to manage its own tool-use and reflection phases natively.
+
+```python
+SYSTEM_PROMPT = """
+YOU ARE A SELF-CORRECTING RESEARCH ANALYST.
+WORKFLOW:
+1. SEARCH: Always search memory first.
+2. EVALUATE: If results are insufficient, use 'add_knowledge'.
+3. REFLECT: Critique your draft for hallucinations or logic errors.
+4. FINAL: Present the refined answer with citations.
+"""
 
 ---
 
