@@ -130,6 +130,38 @@ WORKFLOW:
 4. FINAL: Present the refined answer with citations.
 """
 ```
+## 📅 Day 8: Orchestration & State Machines with LangGraph 🔄
+
+**Goal:** Transition from manual Python loops to a professional orchestration framework by mastering the 5 core graph patterns in LangGraph.
+
+---
+
+### 🏗️ System Architecture
+
+This milestone marks the shift from "scripting" to **System Architecture**. By decoupling the workflow logic (the "Conveyor Belt") from the model's intelligence (the "Worker"), I’ve built a robust skeleton for deterministic state management.
+
+### 1. The State Engine (`TypedDict`)
+- **Centralized Schema:** Defined a structured `State` dictionary that serves as the "single source of truth" passed between nodes.
+- **Context Preservation:** Ensures every step of the process has access to updated variables and history without manual hand-offs.
+
+### 2. The Five Pillars of Logic
+I implemented five foundational patterns using pure Python logic to verify the infrastructure:
+- **Single & Multi-Input:** Mastering state initialization and complex data schemas.
+- **Sequential:** Orchestrating deterministic "Assembly Line" pipelines.
+- **Conditional (Routing):** Implementing logic-based decision paths to navigate the graph.
+- **Looping (Cyclic):** Creating the "Agentic" engine that allows for retries, refinement, and self-correction.
+
+### 3. Separation of Concerns
+- **Nodes as Workers:** Each node is a discrete function responsible for one specific state transformation.
+- **Edges as Orchestrators:** Defines the "road map," controlling the exact flow of execution based on specific conditions.
+
+---
+
+### 🚀 Key Achievements
+- **Deterministic Reliability:** Verified that complex branching and looping logic works with 100% predictability before adding LLM uncertainty.
+- **Modular Design:** Moved away from monolithic scripts to a modular graph that can scale with new tools and personas.
+- **Architectural Readiness:** Prepared the system to host any LLM (Gemini, Claude, or local) as a "plug-and-play" component within the graph.
+
 ---
 
 Developed by **Makarand Thorat**
