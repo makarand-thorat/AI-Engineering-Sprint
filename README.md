@@ -159,6 +159,31 @@ I implemented five foundational patterns using pure Python logic to verify the i
 - **Modular Design:** Moved away from monolithic scripts to a modular graph that can scale with new tools and personas.
 - **Architectural Readiness:** Prepared the system to host any LLM (Gemini, Claude, or local) as a "plug-and-play" component within the graph.
 
+## 📅 Day 9: Cycles & Conditionals — The ReAct Agent 🔄
+
+**Goal:** Implement a self-correcting state machine that loops between reasoning and tool execution to satisfy complex, multi-step goals.
+
+### 🏗️ System Architecture
+
+This milestone implements the **ReAct (Reasoning + Acting)** pattern. By using LangGraph's cyclic capabilities, the agent can now perform internal loops to gather information or process data before ever returning a final result to the user.
+
+### 1. The Reasoning Engine (Gemini 3 Flash)
+- **Tool Binding:** Integrated Gemini 3.0 with a set of arithmetic tools. The model chooses tools based on the semantic intent of the user prompt.
+- **System Instructions:** Injected a `SystemMessage` to maintain persona and reliability throughout the cycle.
+
+### 2. The Logic Loop
+- **Nodes:** - `our_agent`: The LLM reasoning node.
+    - `tools`: A dedicated execution node for running Python functions.
+- **Conditional Edges:** A `should_continue` router that inspects `tool_calls` to decide if the graph should cycle back to the agent or terminate.
+
+### 3. State Management
+- **`add_messages` Reducer:** Prevents message overwriting, allowing the agent to "remember" the results of tool executions from previous cycles.
+- **Sequence Tracking:** Maintained a clean flow of `HumanMessage` -> `AIMessage (Tool Call)` -> `ToolMessage (Result)` -> `AIMessage (Final Answer)`.
+
+### 🚀 Key Achievements
+- **Cyclic Autonomy:** Built an agent capable of looping as many times as necessary to solve a problem (e.g., chained math operations).
+- **Non-Linear Execution:** Moved away from "Step A to Step B" and into a true state-machine that routes data based on the AI's internal logic.
+- **Stream Visualization:** Implemented state streaming to observe the AI's "thought process" and tool usage in real-time.
 ---
 
 Developed by **Makarand Thorat**
