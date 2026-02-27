@@ -184,6 +184,40 @@ This milestone implements the **ReAct (Reasoning + Acting)** pattern. By using L
 - **Cyclic Autonomy:** Built an agent capable of looping as many times as necessary to solve a problem (e.g., chained math operations).
 - **Non-Linear Execution:** Moved away from "Step A to Step B" and into a true state-machine that routes data based on the AI's internal logic.
 - **Stream Visualization:** Implemented state streaming to observe the AI's "thought process" and tool usage in real-time.
+
+## 📅 Day 10: Tool Node Mastery & Automated Workflows 🛠️
+
+**Goal:** Standardize agent actions by integrating LangGraph's pre-built `ToolNode` and implementing robust exit conditions for autonomous document management.
+
+### 🏗️ System Architecture
+
+I evolved the **Drafter** agent to delegate execution to a specialized `ToolNode`. This ensures the agent follows a strict **ReAct (Reasoning and Acting)** pattern:
+
+1.  **Reasoning:** The agent (Gemini 3.0) determines if it needs to update or save a file.
+2.  **Acting:** The `ToolNode` executes the Python functions (`update` or `save`).
+3.  **Observation:** The graph cycles back to the agent or terminates based on the tool's success metadata.
+
+
+
+### 1. The Reasoning Engine (Gemini 3 Flash)
+- **Structured Tool Calling:** Integrated Gemini 3.0 with `update` and `save` tools. The model autonomously decides which tool to use based on the semantic intent of the user prompt.
+- **Contextual Awareness:** Injected a `SystemMessage` that provides the current document state, allowing the AI to understand the context of modifications.
+
+### 2. The Logic Loop
+- **Nodes:** - `agent`: The LLM reasoning node.
+    - `tools`: A dedicated execution node (`ToolNode`) for running Python functions.
+- **Conditional Edges:** A `should_continue` router that inspects `ToolMessage` contents to decide if the graph should cycle back to the agent or terminate.
+
+
+
+### 3. State Management
+- **`add_messages` Reducer:** Prevents message overwriting, allowing the agent to "remember" the results of tool executions from previous cycles.
+- **Workflow State:** Maintains a clean flow of interaction: Human Input -> Reasoning -> Tool Execution -> Verification.
+
+### 🚀 Key Achievements
+- **ToolNode Integration:** Replaced manual `if/else` tool routing with `langgraph.prebuilt.ToolNode`, significantly reducing code complexity.
+- **Robust Exit Conditions:** Implemented a `should_continue` function to parse tool outputs and reliably break the autonomous loop upon successful file saving.
+- **Context Retention:** Successfully maintained state across multiple reasoning cycles, enabling iterative document updates.
 ---
 
 Developed by **Makarand Thorat**
