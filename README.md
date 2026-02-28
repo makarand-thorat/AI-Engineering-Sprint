@@ -218,6 +218,26 @@ I evolved the **Drafter** agent to delegate execution to a specialized `ToolNode
 - **ToolNode Integration:** Replaced manual `if/else` tool routing with `langgraph.prebuilt.ToolNode`, significantly reducing code complexity.
 - **Robust Exit Conditions:** Implemented a `should_continue` function to parse tool outputs and reliably break the autonomous loop upon successful file saving.
 - **Context Retention:** Successfully maintained state across multiple reasoning cycles, enabling iterative document updates.
+
+## 📅 Day 11: Agentic RAG — Knowledge-Augmented Intelligence 📚
+
+**Goal:** Build a Retrieval-Augmented Generation (RAG) agent that autonomously decides when to consult external PDF documents to answer complex queries.
+
+### 🏗️ System Architecture
+
+This milestone moves beyond the agent's internal training data. By integrating a **Vector Database**, the agent can now perform "Open-Book" exams on specific datasets (Stock Market Performance 2024).
+
+1.  **Ingestion:** PDFs are loaded via `PyPDFLoader`, split into semantic chunks, and embedded using `gemini-embedding-001`.
+2.  **Storage:** Vectors are persisted locally in **ChromaDB**, allowing for lightning-fast semantic retrieval.
+3.  **Agentic Retrieval:** The LLM doesn't just "get context." It **chooses** to use the `retriever_tool` only when the user's query requires specific data from the document.
+
+### 🚀 Key Achievements
+
+- **Persistent Vector Store:** Implemented disk-based storage for embeddings, ensuring the knowledge base doesn't vanish between sessions.
+- **Dynamic Tool Usage:** The agent can call the retriever multiple times with different search queries to "triangulate" the best answer.
+- **Source Attribution:** Configured system prompts to ensure the agent cites specific document sections, increasing factual reliability and reducing hallucinations.
+
+
 ---
 
 Developed by **Makarand Thorat**
