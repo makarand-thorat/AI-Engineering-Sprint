@@ -237,6 +237,26 @@ This milestone moves beyond the agent's internal training data. By integrating a
 - **Dynamic Tool Usage:** The agent can call the retriever multiple times with different search queries to "triangulate" the best answer.
 - **Source Attribution:** Configured system prompts to ensure the agent cites specific document sections, increasing factual reliability and reducing hallucinations.
 
+## 📅 Day 12: Self-Correcting Coding Agent — The Debugging Loop 🛠️
+
+**Goal:** Build an autonomous agent capable of writing Python code, executing it in a real environment, and using real-time error feedback to self-correct until a valid solution is reached.
+
+### 🏗️ System Architecture
+
+Today’s milestone introduces the **Cyclic Reasoning Pattern**. Unlike traditional linear pipelines, this agent operates within a "Loop of Truth"—it cannot provide a final answer until its generated code executes successfully.
+
+
+1.  **Generation Node (`call_model`):** The LLM acts as a Senior Developer, interpreting the user's prompt to architect a Python solution.
+2.  **Execution Node (`python_executor`):** A custom environment that runs the code and captures the output or the exact Stack Trace if it fails.
+3.  **Self-Correction Loop:** If a failure is detected, the full history—including the faulty code and the specific error message—is sent back to the LLM for analysis.
+4.  **State Management:** The system tracks "Execution Iterations" to ensure the agent has a set budget (e.g., 5 attempts) to fix the bug, preventing infinite loops and managing API costs.
+
+### 🚀 Key Achievements
+
+* **Operational Feedback Loops:** Moved beyond static prompting. The agent now uses external "ground truth" (terminal output) to validate its own reasoning.
+* **Recursive Debugging:** Developed the logic for the agent to analyze tracebacks, identify syntax or logical errors, and provide iterative fixes autonomously.
+* **Stateful Iteration Tracking:** Implemented an "Agentic Kill-Switch" within the StateGraph to manage computational resources and ensure system stability.
+* **Dynamic Tool Calling:** Orchestrated a seamless transition between the "Thinker" (LLM) and the "Doer" (REPL Tool).
 
 ---
 
