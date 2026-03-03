@@ -259,10 +259,10 @@ Today’s milestone introduces the **Cyclic Reasoning Pattern**. Unlike traditio
 * **Dynamic Tool Calling:** Orchestrated a seamless transition between the "Thinker" (LLM) and the "Doer" (REPL Tool).
 
 
-##📅 Day 13: Persistent AI Agents — The MySQL Memory Layer 🧠💾
+## 📅 Day 13: Persistent AI Agents — The MySQL Memory Layer 🧠💾
 **Goal**: Transform the self-correcting agent into a production-ready system by migrating from volatile RAM-based memory to a persistent MySQL database backend.
 
-###🏗️ System Architecture
+### 🏗️ System Architecture
 Today’s milestone introduces Durable State Management. By integrating a relational database, the agent's conversation history and internal reasoning (checkpoints) are preserved even if the script crashes or the server restarts.
 
 1.  **Persistence Layer (PyMySQLSaver):** Replaces the temporary MemorySaver. This layer connects the LangGraph workflow to a dedicated MySQL schema (langgraph_db).
@@ -273,7 +273,7 @@ Today’s milestone introduces Durable State Management. By integrating a relati
 
 4.  **Schema Automation:** Implemented checkpointer.setup(), which automatically architects the required relational tables (checkpoints, checkpoint_blobs, checkpoint_writes) within the database.
 
-###🚀 Key Achievements
+### 🚀 Key Achievements
 *  **Long-Term Memory:** Successfully moved the agent's "brain" from temporary memory to a permanent disk-based storage system.
 
 *  **Session Resumption:** Enabled the ability to stop the Python process and resume a complex debugging task hours later without losing progress.
