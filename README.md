@@ -258,6 +258,29 @@ Today’s milestone introduces the **Cyclic Reasoning Pattern**. Unlike traditio
 * **Stateful Iteration Tracking:** Implemented an "Agentic Kill-Switch" within the StateGraph to manage computational resources and ensure system stability.
 * **Dynamic Tool Calling:** Orchestrated a seamless transition between the "Thinker" (LLM) and the "Doer" (REPL Tool).
 
+
+##📅 Day 13: Persistent AI Agents — The MySQL Memory Layer 🧠💾
+**Goal**: Transform the self-correcting agent into a production-ready system by migrating from volatile RAM-based memory to a persistent MySQL database backend.
+
+###🏗️ System Architecture
+Today’s milestone introduces Durable State Management. By integrating a relational database, the agent's conversation history and internal reasoning (checkpoints) are preserved even if the script crashes or the server restarts.
+
+1.  **Persistence Layer (PyMySQLSaver):** Replaces the temporary MemorySaver. This layer connects the LangGraph workflow to a dedicated MySQL schema (langgraph_db).
+
+2.  **Checkpointing Engine:** After every node execution (e.g., call_model or tools), a binary "snapshot" of the entire AgentState is serialized and saved to SQL tables.
+
+3.  **Thread-Based Retrieval:** Uses a unique thread_id to act as a lookup key. This allows the agent to distinguish between different users and resume specific conversations instantly.
+
+4.  **Schema Automation:** Implemented checkpointer.setup(), which automatically architects the required relational tables (checkpoints, checkpoint_blobs, checkpoint_writes) within the database.
+
+###🚀 Key Achievements
+*  **Long-Term Memory:** Successfully moved the agent's "brain" from temporary memory to a permanent disk-based storage system.
+
+*  **Session Resumption:** Enabled the ability to stop the Python process and resume a complex debugging task hours later without losing progress.
+
+*  **Environment-Driven Security:** Decoupled sensitive database credentials from the logic layer by implementing a secure .env configuration.
+
+*  **Multi-User Scalability:** Established a foundation where unique thread_id values allow one agent instance to manage hundreds of independent, persistent conversations.
 ---
 
 Developed by **Makarand Thorat**
