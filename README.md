@@ -281,6 +281,27 @@ Today’s milestone introduces Durable State Management. By integrating a relati
 *  **Environment-Driven Security:** Decoupled sensitive database credentials from the logic layer by implementing a secure .env configuration.
 
 *  **Multi-User Scalability:** Established a foundation where unique thread_id values allow one agent instance to manage hundreds of independent, persistent conversations.
+
+## 📅 Day 14/30: Project 1 — Autonomous Research Assistant 🕵️‍♂️📑
+
+**Goal:** Build a production-ready autonomous research agent that leverages real-time web browsing and automated file persistence to synthesize complex topics into structured notes.
+
+### 🏗️ System Architecture
+
+Today’s milestone marks the transition from simple chat loops to a **Multi-Tool Orchestration** system. The agent acts as a controller, deciding which tools to call and when the research objective has been met.
+
+1. **Search Node (`duckduckgo_search`):** Provides the agent with live access to the internet, bypassing the LLM's static knowledge cutoff.
+2. **Logic Engine (Gemini 1.5 Flash):** Acts as the "Reasoning Layer." It evaluates search results to determine if the user's query is fully answered or if further searching is required.
+3. **Persistence Node (`save_research_note`):** A custom tool decorated with `@tool` that allows the agent to interact with the local file system to save markdown notes.
+4. **Custom Router:** A manual routing node that inspects the state for `tool_calls`. This determines the flow: **Agent ➔ Router ➔ Action (Tools) ➔ Agent.**
+
+### 🚀 Key Achievements
+
+* **Autonomous Tool Use:** Successfully implemented the **ReAct (Reasoning and Acting)** pattern where the LLM independently decides to use search or save tools.
+* **Dynamic File Management:** The agent demonstrated "Creative Agency" by intelligently renaming files (e.g., `ai_trends.md`) based on research context rather than just using generic defaults.
+* **Manual Routing Logic:** Built a custom router function to manage the graph flow, providing more transparency and control than prebuilt conditions.
+* **Persistent Research:** Continued using the **MySQL Checkpointer** from Day 13, ensuring that even complex, multi-step research sessions are durable and resumable.
+
 ---
 
 Developed by **Makarand Thorat**
