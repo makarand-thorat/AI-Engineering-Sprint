@@ -282,7 +282,7 @@ Today’s milestone introduces Durable State Management. By integrating a relati
 
 *  **Multi-User Scalability:** Established a foundation where unique thread_id values allow one agent instance to manage hundreds of independent, persistent conversations.
 
-## 📅 Day 14/30: Project 1 — Autonomous Research Assistant 🕵️‍♂️📑
+## 📅 Day 14: Project 1 — Autonomous Research Assistant 🕵️‍♂️📑
 
 **Goal:** Build a production-ready autonomous research agent that leverages real-time web browsing and automated file persistence to synthesize complex topics into structured notes.
 
