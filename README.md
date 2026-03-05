@@ -302,6 +302,40 @@ Today’s milestone marks the transition from simple chat loops to a **Multi-Too
 * **Manual Routing Logic:** Built a custom router function to manage the graph flow, providing more transparency and control than prebuilt conditions.
 * **Persistent Research:** Continued using the **MySQL Checkpointer** from Day 13, ensuring that even complex, multi-step research sessions are durable and resumable.
 
+
+## Day 15: Multi-Agent Orchestration (The Supervisor Pattern)
+
+### 🎯 Objective
+Transition from a "Swiss Army Knife" single agent to a professional "Kitchen Staff" architecture. Today's goal was to build a system where a central **Supervisor** coordinates specialized **Researcher** and **Writer** agents to produce a technical report.
+
+---
+
+### 🏗️ Architecture: The Orchestrator Pattern
+In this design, agents don't talk to each other directly (Choreography); instead, they report back to a central "Brain" (Orchestration).
+
+### The Workflow:
+1.  **User Input:** "Research 2026 tech trends and save to report.md."
+2.  **Supervisor:** Analyzes the state and delegates the task to the **Researcher**.
+3.  **Researcher:** Executes parallel web searches and returns the data.
+4.  **Supervisor:** Sees the data is ready and delegates the task to the **Writer**.
+5.  **Writer:** Formats the findings and uses the `write_file` tool.
+6.  **Supervisor:** Detects completion and signals the end of the process.
+
+### 🛠️ Technical Challenges & Fixes
+
+### 1. The "Turn-Order" Constraint (Gemini Specific)
+**Problem:** Gemini's API enforces a strict "User-Assistant-Tool" sequence. In multi-agent loops, the history often results in multiple "Assistant" turns in a row, causing a `400 INVALID_ARGUMENT` error.
+**Fix:** Implemented a **Context Reset**. Before invoking a worker, we wrap the relevant history into a fresh `HumanMessage`. This "tricks" the model into seeing a new user turn, ensuring API compliance.
+
+#### 2. Parallel Tool Handling
+**Problem:** The Researcher often calls multiple tools simultaneously. LangGraph stores these as a `list` of messages, which caused an `AttributeError` when trying to access `.content` directly.
+**Fix:** Added a robust check in the Supervisor to detect `list` objects and join the contents into a single string for analysis.
+
+
+### 🚀 Key Features
+- **Iteration Control:** Added a safety counter to prevent infinite loops (set to 1 full cycle).
+- **Specialized Prompting:** Each worker has a narrow scope, increasing accuracy and reducing "context dilution."
+- **State Management:** Uses a shared `TypedDict` state to pass the "baton" between agents.
 ---
 
 Developed by **Makarand Thorat**
