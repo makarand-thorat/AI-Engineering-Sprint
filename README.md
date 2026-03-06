@@ -334,6 +334,38 @@ In this design, agents don't talk to each other directly (Choreography); instead
 - **Iteration Control:** Added a safety counter to prevent infinite loops (set to 1 full cycle).
 - **Specialized Prompting:** Each worker has a narrow scope, increasing accuracy and reducing "context dilution."
 - **State Management:** Uses a shared `TypedDict` state to pass the "baton" between agents.
+
+## Day 16: CrewAI Fundamentals — Building a Research Team
+
+
+**Goal:** Transition from manual graph-based agents to a high-level **Agentic Framework**. Today, I built a two-agent "Crew" consisting of a **Senior Research Analyst** and a **Tech Content Strategist** to automate the end-to-end process of researching and reporting on emerging tech trends.
+
+### 🏗️ Architecture: Sequential Multi-Agent Crew
+Unlike simple chains, CrewAI uses a "Role-Playing" architecture where agents are defined by their **Role**, **Goal**, and **Backstory**. This provides a much deeper cognitive context for the LLM.
+
+#### The Team:
+1.  **Senior Research Analyst:** - **Goal:** Uncover cutting-edge developments in a specific topic.
+    - **Tools:** Powered by `SerperDevTool` for real-time Google Search access.
+2.  **Tech Content Strategist:** - **Goal:** Translate complex research into an engaging, 3-point blog post.
+    - **Handoff:** Automatically receives the Researcher's output as its input.
+
+### 🛠️ Key Technical Features
+
+#### 1. Sequential Process Management
+I implemented a `Process.sequential` workflow. This ensures a strict linear progression:
+- **Task 1 (Research):** Analyzes 2026 breakthroughs and outputs 3 key findings.
+- **Task 2 (Writing):** Takes those specific findings and formats them into a professional markdown report.
+
+#### 2. Native Gemini Integration
+By using the `langchain_google_genai` provider, I integrated **Gemini 1.5 Flash** as the brain for both agents. This allows for high-speed reasoning while maintaining low token costs.
+
+#### 3. Automated File Delivery
+Instead of just printing to the console, I configured the final task with the `output_file="crew_report.md"` parameter. This ensures the agentic workflow results in a tangible asset saved directly to the local workspace.
+
+### 📝 Lessons Learned
+- **Framework over Logic:** CrewAI abstracts away the "state management" and "router" logic needed in LangGraph, allowing the developer to focus on **Agent Personas**.
+- **Expected Output:** Defining the `expected_output` for each task is the most critical step to prevent agent "hallucination" or scope creep.
+- **Tooling:** Adding the `SerperDevTool` effectively gave the agents "eyes" on the current internet, bridging the gap between training data and real-time facts.
 ---
 
 Developed by **Makarand Thorat**
