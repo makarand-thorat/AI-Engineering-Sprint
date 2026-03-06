@@ -303,7 +303,7 @@ Today’s milestone marks the transition from simple chat loops to a **Multi-Too
 * **Persistent Research:** Continued using the **MySQL Checkpointer** from Day 13, ensuring that even complex, multi-step research sessions are durable and resumable.
 
 
-## Day 15: Multi-Agent Orchestration (The Supervisor Pattern)
+## 📅 Day 15: Multi-Agent Orchestration (The Supervisor Pattern)
 
 
 **Goal:** Transition from a "Swiss Army Knife" single agent to a professional "Kitchen Staff" architecture. Today's goal was to build a system where a central **Supervisor** coordinates specialized **Researcher** and **Writer** agents to produce a technical report.
@@ -335,7 +335,7 @@ In this design, agents don't talk to each other directly (Choreography); instead
 - **Specialized Prompting:** Each worker has a narrow scope, increasing accuracy and reducing "context dilution."
 - **State Management:** Uses a shared `TypedDict` state to pass the "baton" between agents.
 
-## Day 16: CrewAI Fundamentals — Building a Research Team
+## 📅 Day 16: CrewAI Fundamentals — Building a Research Team
 
 
 **Goal:** Transition from manual graph-based agents to a high-level **Agentic Framework**. Today, I built a two-agent "Crew" consisting of a **Senior Research Analyst** and a **Tech Content Strategist** to automate the end-to-end process of researching and reporting on emerging tech trends.
