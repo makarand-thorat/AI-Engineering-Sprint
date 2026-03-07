@@ -366,6 +366,30 @@ Instead of just printing to the console, I configured the final task with the `o
 - **Framework over Logic:** CrewAI abstracts away the "state management" and "router" logic needed in LangGraph, allowing the developer to focus on **Agent Personas**.
 - **Expected Output:** Defining the `expected_output` for each task is the most critical step to prevent agent "hallucination" or scope creep.
 - **Tooling:** Adding the `SerperDevTool` effectively gave the agents "eyes" on the current internet, bridging the gap between training data and real-time facts.
+
+## Day 17: LangGraph — Smart Routing & Command Handoffs
+
+**Goal:** Implement a "Concierge Pattern" using LangGraph. Today, I built a system that uses an LLM-based **Router** to dynamically triage user requests to specialized expert nodes (Math vs. Creative) using the modern `Command` pattern.
+
+
+### 🏗️ Architecture: The Concierge Pattern
+Unlike basic linear chains, this graph uses a "Zero-Edge" approach for internal routing.
+
+1.  **Router (Concierge):** Uses Gemini 3 Flash to analyze intent. Instead of hard-coded keywords, it intelligently understands whether a query requires logic/math or creative writing.
+2.  **Specialists:** Two distinct nodes (`math_expert` and `creative_expert`) that only execute when called by the Router.
+3.  **Command Pattern:** Utilized the `langgraph.types.Command` object to handle both the state update and the navigation (`goto`) in a single return statement.
+
+
+### 🛠️ Key Technical Wins
+
+#### 1. LLM-Based Triage
+Moved away from fragile `if "math" in query` checks. By using a small "Router Prompt," the system can now handle complex natural language (e.g., "What is 15% of 450?") and route it correctly.
+
+#### 2. Handling Multimodal Content Blocks
+Navigated the Gemini 3 Flash output structure. Since the model returns a `list[dict]` for content (to support text + image blocks), I implemented direct indexing to extract the `decision_text` cleanly.
+
+#### 3. State Management
+Used the built-in `MessagesState` to maintain a clean chat history while allowing the specialists to access the original human query through simple list indexing (`state["messages"][0]`).
 ---
 
 Developed by **Makarand Thorat**
