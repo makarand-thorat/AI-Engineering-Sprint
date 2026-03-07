@@ -382,12 +382,14 @@ Unlike basic linear chains, this graph uses a "Zero-Edge" approach for internal 
 
 ### 🛠️ Key Technical Wins
 
-#### 1. LLM-Based Triage
+1. **LLM-Based Triage**
 Moved away from fragile `if "math" in query` checks. By using a small "Router Prompt," the system can now handle complex natural language (e.g., "What is 15% of 450?") and route it correctly.
 
-#### 2. Handling Multimodal Content Blocks
+2. **Handling Multimodal Content Blocks**
 Navigated the Gemini 3 Flash output structure. Since the model returns a `list[dict]` for content (to support text + image blocks), I implemented direct indexing to extract the `decision_text` cleanly.
 
+3. **State Management**
+Used the built-in `MessagesState` to maintain a clean chat history while allowing the specialists to access the original human query through simple list indexing (`state["messages"][0]`).
 ---
 
 Developed by **Makarand Thorat**
