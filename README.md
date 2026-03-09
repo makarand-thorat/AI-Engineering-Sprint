@@ -390,6 +390,21 @@ Navigated the Gemini 3 Flash output structure. Since the model returns a `list[d
 
 3. **State Management**
 Used the built-in `MessagesState` to maintain a clean chat history while allowing the specialists to access the original human query through simple list indexing (`state["messages"][0]`).
+
+## 📅 Day 18: Recursive Hierarchical Teams
+
+### 🎯 The Breakthrough
+Today, I moved from simple "Agents" to a "Self-Healing Organization." My system uses a **Hierarchical Process** nested inside a **CrewAI Flow**.
+
+### 🛠️ Technical Stack
+* **Orchestration:** CrewAI Flows (Stateful logic)
+* **Management:** Hierarchical Process (Manager LLM)
+* **Validation:** LLM-based Router for automated Quality Assurance.
+
+### 🧠 Key Learnings
+* **Template Strings:** Learned why plain strings are safer than f-strings when passing data from `kickoff` to `Tasks`.
+* **Stateful Memory:** Used `Pydantic` to maintain a `retry_count` and `feedback` loop across multiple execution attempts.
+* **Encapsulation:** Used `__init__` to hire agents only when the department is called.
 ---
 
 Developed by **Makarand Thorat**
