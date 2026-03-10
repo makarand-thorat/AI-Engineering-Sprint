@@ -405,6 +405,29 @@ Today, I moved from simple "Agents" to a "Self-Healing Organization." My system 
 * **Template Strings:** Learned why plain strings are safer than f-strings when passing data from `kickoff` to `Tasks`.
 * **Stateful Memory:** Used `Pydantic` to maintain a `retry_count` and `feedback` loop across multiple execution attempts.
 * **Encapsulation:** Used `__init__` to hire agents only when the department is called.
----
+
+## 📅 Day 19: Collaborative Coding — Dev Team Flow 💻
+
+
+**Goal:** To build an automated **SDLC (Software Development Life Cycle)** using a multi-agent "Department" nested within a stateful Flow.
+
+
+### 🏗️ Architecture: The "Safe Code" Loop
+I implemented a **Creator vs. Critic** pattern to ensure high-quality, peer-reviewed output.
+
+* **Coder Agent (Senior Dev):** Writes the implementation based on requirements.
+* **Reviewer Agent (Security/QA):** A skeptical peer hunting for bugs, PEP8 issues, and security holes.
+* **The Flow (Project Manager):** Tracks `DevState` (retry counts, feedback, and code).
+* **The Loop:** If the Reviewer finds issues, the Flow captures the `review_feedback` and triggers a re-coding phase.
+
+
+### 🛠️ Technical Implementation
+* **Stateful Memory:** Used `Pydantic` to carry feedback across loops so the Coder learns from mistakes.
+* **Nested Hierarchy:** Utilized `Process.hierarchical` inside the Crew to allow a Manager LLM to oversee the handoff.
+* **Refactor Logic:** An automated `@router` determines if the code is "Deployable" or "Needs Fix."
+
+### 🧠 Key Learning
+Quality increases exponentially when you give one agent the **explicit goal to find faults**. By setting the Reviewer's backstory to "Paranoid Security Engineer," the final code is documented, type-hinted, and robust.
+
 
 Developed by **Makarand Thorat**
