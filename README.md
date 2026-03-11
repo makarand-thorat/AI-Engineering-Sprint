@@ -429,5 +429,30 @@ I implemented a **Creator vs. Critic** pattern to ensure high-quality, peer-revi
 ### 🧠 Key Learning
 Quality increases exponentially when you give one agent the **explicit goal to find faults**. By setting the Reviewer's backstory to "Paranoid Security Engineer," the final code is documented, type-hinted, and robust.
 
+## 📅 Day 20: LangGraph Migration — Production-Grade HITL 🏛️
+
+**Goal:** To migrate the SDLC workflow from CrewAI to **LangGraph** to implement enterprise-grade **Human-in-the-Loop (HITL)** and state persistence.
+
+
+### 🏗️ Architecture: The "Governor" Pattern
+I shifted from simple orchestration to a **State Machine** architecture where the human acts as the final gatekeeper.
+
+* **State Management:** Defined a `TypedDict` state to track requirements, code snippets, and approval status across the lifecycle.
+* **The Checkpointer:** Integrated `MemorySaver` to provide "Time Travel" capabilities—the graph can be saved and resumed without losing context.
+* **The Breakpoint:** Configured `interrupt_before` on a dedicated `human_approval` node, forcing the AI to stop and wait for manual verification.
+* **The Feedback Loop:** If the human provides feedback instead of approval, the graph uses `update_state` to inject comments and "rewinds" the execution pointer.
+
+### 🛠️ Technical Implementation
+* **Node-Based Logic:** Rebuilt Agents as functional nodes, allowing for precise control over input/output data structures.
+* **Conditional Routing:** Implemented a logic-based router that evaluates boolean state variables to determine if the graph finishes or recurses.
+* **State Injection:** Mastered the use of `as_node` in state updates to manually trigger specific paths in the graph's logic.
+* **Defensive Parsing:** Created a robust streaming loop to handle Gemini's multi-modal message formats (handling both list and string content types).
+
+
+### 🧠 Key Learning
+The transition from "Scripting" to "Graph Engineering" is the bridge to production AI. By using **Checkpoints** and **Interrupts**, I've moved away from a "Black Box" agent toward a transparent, auditable system where a human can steer the AI's logic in real-time. This level of control is what separates a prototype from a professional AI product.
+
+---
+
 
 Developed by **Makarand Thorat**
