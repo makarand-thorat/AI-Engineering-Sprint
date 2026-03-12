@@ -452,6 +452,27 @@ I shifted from simple orchestration to a **State Machine** architecture where th
 ### 🧠 Key Learning
 The transition from "Scripting" to "Graph Engineering" is the bridge to production AI. By using **Checkpoints** and **Interrupts**, I've moved away from a "Black Box" agent toward a transparent, auditable system where a human can steer the AI's logic in real-time. This level of control is what separates a prototype from a professional AI product.
 
+
+## 📅 Day 21: Tool Augmentation — The Autonomous Researcher 🔍
+
+**Goal:** To build a self-correcting "Social Media Manager" using the **ReAct (Reasoning + Acting)** pattern and DuckDuckGo search integration.
+
+### 🏗️ Architecture: The "Reasoning" Cycle
+I moved beyond static generation by giving the agent "hands" to fetch real-time data.
+
+* **Researcher Node:** Evaluates the topic and determines if it needs more information. It triggers tool calls dynamically.
+* **Tool Node (DuckDuckGo):** A dedicated node that executes search queries and returns observations back to the graph state.
+* **The "Circuit Breaker" Logic:** Implemented a search counter to prevent infinite loops, forcing a transition to the Creator node if the agent gets stuck in a "search spiral."
+* **State Reducers:** Used `Annotated[list, add_messages]` to ensure the agent maintains a continuous memory of its research findings.
+
+### 🛠️ Technical Implementation
+* **Gemini Turn-Order Fix:** Solved the `ValueError: contents are required` by ensuring every tool request is preceded by a `HumanMessage` to satisfy Gemini's strict turn-taking requirements.
+* **Conditional Routing:** Implemented `tools_condition` from LangGraph's prebuilt library to manage the handoff between the LLM and the search tool.
+* **Recursive Debugging:** Configured the graph to allow the Researcher to see its own previous results, enabling it to "refine" its search if the first results were insufficient.
+
+### 🧠 Key Learning
+The most difficult part of Tool Augmentation isn't the API call—it's **State Management**. Ensuring the agent "remembers" the tool's output and doesn't get caught in an infinite loop requires precise control over the message history and the use of message reducers.
+
 ---
 
 
