@@ -473,6 +473,26 @@ I moved beyond static generation by giving the agent "hands" to fetch real-time 
 ### 🧠 Key Learning
 The most difficult part of Tool Augmentation isn't the API call—it's **State Management**. Ensuring the agent "remembers" the tool's output and doesn't get caught in an infinite loop requires precise control over the message history and the use of message reducers.
 
+# 📅 Day 22: Agentic Observability & Evaluation 🧪
+
+**Goal:** To transition from "black box" development to a data-driven engineering workflow by implementing full-stack observability and automated testing with **LangSmith**.
+
+### 🏗️ Architecture: The "Transparency" Loop
+I moved from simply running code to "auditing" every decision the LLM makes through a dedicated observability pipeline.
+
+* **Manual Graph Construction:** Avoided deprecated agent executors to build a raw `StateGraph`. This allows for a granular view in LangSmith, where each node (Agent vs. Tools) is timestamped and tracked individually.
+* **Explicit Router Logic:** Instead of using "magic" prebuilt conditions, I mapped the `tools_condition` to explicit `END` and `tools` edges. This ensures the trace accurately reflects the branching logic of the ReAct pattern.
+
+* **The "Golden" Dataset:** Captured successful traces and converted them into a version-controlled benchmark. This creates a "ground truth" that the agent must satisfy even as the underlying model or prompts change.
+
+### 🛠️ Technical Implementation
+* **LLM-as-a-Judge:** Implemented an automated evaluation script (`eval_test.py`) using **Gemini 2.5 Flash** as a "Judge" to grade the performance of **Gemini 3 Flash**. This provides a quantitative "Relevance" score for every run.
+
+* **Path-Aware Dotenv Loading:** Solved directory-scoping issues by implementing explicit pathing for `.env` files, ensuring that the tracing configuration is active regardless of where the script is executed.
+
+### 🧠 Key Learning
+The real shift in Day 22 was realizing that **AI Engineering is 20% prompting and 80% evaluation.** Without observability, you are just "vibing" with your prompts. By building a baseline dataset and an automated judge, I can now mathematically prove if a prompt change actually improves the system or just changes the style.
+
 ---
 
 
