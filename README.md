@@ -516,11 +516,11 @@ The agent now follows a **"Trust but Verify"** model. When it decides to use a t
 I implemented a safety filter that acts as a "hard law" the LLM cannot bypass. If the agent tries to post about "crypto-scams" or "spam," the guardrail triggers an automatic rejection.
 
 ### 🚀 Results
-** Safe Execution: Valid posts require a "yes" to proceed.
+* Safe Execution: Valid posts require a "yes" to proceed.
 
-** Auto-Rejection: Banned words trigger an immediate "Rewrite" loop without human effort.
+* Auto-Rejection: Banned words trigger an immediate "Rewrite" loop without human effort.
 
-** Audit Trail: LangSmith's Trace Tree shows the exact gap where the human review occurred.
+* Audit Trail: LangSmith's Trace Tree shows the exact gap where the human review occurred.
 
 ---
 
