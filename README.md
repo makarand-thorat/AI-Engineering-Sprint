@@ -493,6 +493,35 @@ I moved from simply running code to "auditing" every decision the LLM makes thro
 ### 🧠 Key Learning
 The real shift in Day 22 was realizing that **AI Engineering is 20% prompting and 80% evaluation.** Without observability, you are just "vibing" with your prompts. By building a baseline dataset and an automated judge, I can now mathematically prove if a prompt change actually improves the system or just changes the style.
 
+
+## 📅 Day 23: Human-in-the-Loop & Neurosymbolic Guardrails
+
+**Goal:** Today’s focus was transitioning from an autonomous agent to a **steerable, safe agent**. I implemented a system that pauses for human intervention and utilizes hard-coded guardrails to prevent tool-calling hallucinations or policy violations.
+
+## 🏗️ The Architecture
+Unlike a standard ReAct loop, this workflow introduces a **Stateful Checkpointer** and an **Interrupt Node**.
+
+
+### Key Components:
+1.  **Persistence Layer:** Used `InMemorySaver` to enable state persistence. This allows the graph to be paused and resumed across different sessions using a `thread_id`.
+2.  **The Interrupt Pattern:** Implemented the `interrupt()` function to halt execution before sensitive tool calls (Social Media posting).
+3.  **Neurosymbolic Guardrail:** A hybrid approach using Python logic (`output_guardrail`) to filter LLM-generated tool arguments for banned keywords before they ever reach the user for approval.
+
+### 🛠️ Implementation Details
+
+### 1. Human-in-the-Loop (HITL)
+The agent now follows a **"Trust but Verify"** model. When it decides to use a tool, it doesn't execute immediately. Instead, it enters a `human_approval` node that triggers an `__interrupt__`. 
+
+### 2. Guardrail Filtering
+I implemented a safety filter that acts as a "hard law" the LLM cannot bypass. If the agent tries to post about "crypto-scams" or "spam," the guardrail triggers an automatic rejection.
+
+### 🚀 Results
+** Safe Execution: Valid posts require a "yes" to proceed.
+
+** Auto-Rejection: Banned words trigger an immediate "Rewrite" loop without human effort.
+
+** Audit Trail: LangSmith's Trace Tree shows the exact gap where the human review occurred.
+
 ---
 
 
