@@ -522,6 +522,27 @@ I implemented a safety filter that acts as a "hard law" the LLM cannot bypass. I
 
 * Audit Trail: LangSmith's Trace Tree shows the exact gap where the human review occurred.
 
+## 📅 Day 24: Advanced Entity Memory
+
+Today I implemented **Entity Memory**, moving beyond linear chat history to building a persistent, structured profile of the user.
+
+### 🏗️ Two-Tiered Memory Architecture
+I developed two versions to compare data handling:
+1.  **Unstructured (Text):** LLM summarizes facts into a descriptive paragraph.
+2.  **Structured (JSON):** Uses **Pydantic** to categorize facts into a strict schema (Interests, Location, Restrictions).
+
+
+
+### 🛠️ Technical Workflow
+* **Extraction Node:** An LLM-based "Secretary" node that runs *before* the agent to update the user profile.
+* **Pydantic Enforcement:** Forces the AI to extract facts into a predictable dictionary format.
+* **Context Injection:** The structured profile is injected into the **System Message**, ensuring the agent never "forgets" key user traits during long sessions.
+
+
+
+### 🚀 Key Results
+* **Personalization:** The agent now connects dots across messages (e.g., suggesting a restaurant based on a location mentioned 20 turns ago).
+* **Deterministic Logic:** Because the memory is JSON, I can now use standard Python logic (if/else) based on user attributes.
 ---
 
 
