@@ -543,6 +543,25 @@ I developed two versions to compare data handling:
 ### 🚀 Key Results
 * **Personalization:** The agent now connects dots across messages (e.g., suggesting a restaurant based on a location mentioned 20 turns ago).
 * **Deterministic Logic:** Because the memory is JSON, I can now use standard Python logic (if/else) based on user attributes.
+
+## 📅 Day 25: Cost Optimization & Model Routing
+
+**Goal:** Today I implemented a **CFO for my AI**. In production, using a high-reasoning model for a simple "Hello" is a waste of resources. I built an **Intelligent Router** that tiers LLM workloads based on task complexity.
+
+### 🏗️ The Tiered Architecture
+The system acts as a traffic controller, directing queries to the most cost-effective "Specialist":
+* **Gemini 2.5 Flash Lite (The Dispatcher):** An ultra-fast, low-cost model that classifies user intent.
+* **Gemini 3 Flash (The Specialist):** A higher-reasoning model invoked only when the task requires coding, analysis, or complex logic.
+
+### 🛠️ Technical Implementation
+* **Classification Node:** A "Gatekeeper" node that prompts the small model to return a single-word decision: `easy` or `complex`.
+* **Conditional Branching:** Leveraged LangGraph's `add_conditional_edges` to physically route the state to different specialist nodes.
+* **Dynamic State:** The `complexity` key in the state dictionary dictates the path, ensuring the "Large" model is only billed when necessary.
+
+### 🚀 Results
+* **Cost Efficiency:** Simple greetings and basic Q&A now run at a fraction of the cost of complex reasoning tasks.
+* **Reduced Latency:** Flash Lite provides near-instant routing decisions, making the overall system feel significantly faster for the end-user.
+* **Scalability:** This architecture allows for adding even more tiers (e.g., an "Ultra" tier for math-heavy tasks) without re-engineering the entire graph.
 ---
 
 
