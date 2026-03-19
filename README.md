@@ -562,7 +562,44 @@ The system acts as a traffic controller, directing queries to the most cost-effe
 * **Cost Efficiency:** Simple greetings and basic Q&A now run at a fraction of the cost of complex reasoning tasks.
 * **Reduced Latency:** Flash Lite provides near-instant routing decisions, making the overall system feel significantly faster for the end-user.
 * **Scalability:** This architecture allows for adding even more tiers (e.g., an "Ultra" tier for math-heavy tasks) without re-engineering the entire graph.
+
+## 📅 Day 26: Building the Production AI API
+
+**Goal:** Today I transitioned the LangGraph agent from a local script into a multi-service API architecture. I built a custom FastAPI backend for client interactions and a LangServe instance for developer tools.
+
+### 🏗️ Project Structure
+I decoupled the core logic from the interface to allow for independent scaling and testing:
+
+* **`agent.py`**: The "Brain." Contains the LangGraph definition and the logic for clearing message history.
+* **`main.py`**: The "Client API." A custom FastAPI instance running on **Port 8000** for standard user requests.
+* **`main_langserve.py`**: The "Developer API." A LangServe instance running on **Port 8001** for native streaming and a visual Playground.
+
+### 🛠️ Features Implemented
+
+#### **1. Dual-Port Deployment**
+I successfully deployed two parallel FastAPI applications to isolate development tools from user traffic:
+* **Port 8000**: Clean REST endpoints (`POST /chat` and `DELETE /chat`).
+* **Port 8001**: Automatic `/agent/playground` for real-time visual debugging.
+
+#### **2. Atomic Memory Clearing**
+I implemented a "Nuclear Reset" function that wipes conversation history from the checkpointer.
+* **Method**: Used `RemoveMessage` to target and delete specific message IDs.
+* **Verification**: Verified via terminal logs: `Memory Status: 0 messages remaining`.
+
+#### **3. Multi-User Threading**
+Integrated `thread_id` into all API calls to ensure the agent can maintain isolated conversation states for multiple users simultaneously.
+
+### 🚀 API Endpoints
+
+| Endpoint | Method | Action |
+| :--- | :--- | :--- |
+| `http://localhost:8000/chat` | **POST** | Sends a message to the agent using a unique `thread_id`. |
+| `http://localhost:8000/chat/{id}` | **DELETE** | Wipes the entire memory for a specific user ID. |
+| `http://localhost:8001/agent/playground` | **GET** | Opens the visual UI to watch the agent execute graph nodes. |
+
 ---
+
+
 
 
 Developed by **Makarand Thorat**
