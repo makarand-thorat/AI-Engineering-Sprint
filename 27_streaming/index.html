@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Day 27: Streaming AI</title>
+    <style>
+        body { font-family: sans-serif; max-width: 600px; margin: 50px auto; line-height: 1.6; }
+        #output { border: 1px solid #ccc; padding: 20px; min-height: 100px; background: #f9f9f9; white-space: pre-wrap; }
+        button { padding: 10px 20px; cursor: pointer; background: #007bff; color: white; border: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>🚀 Day 27 Streaming</h1>
+    <input type="text" id="userInput" placeholder="Ask me something long..." style="width: 80%; padding: 10px;">
+    <button onclick="startStream()">Send</button>
+    <div id="output">AI response will appear here token-by-token...</div>
+
+    <script>
+        async function startStream() {
+            console.log("programme running");
+            const output = document.getElementById('output');
+            const input = document.getElementById('userInput');
+            output.innerText = ""; // Clear previous
+            
+            const response = await fetch('http://localhost:8000/chat/stream', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: input.value, thread_id: "demo_user" })
+            });
+
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder();
+
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+                
+                const chunk = decoder.decode(value);
+                const lines = chunk.split('\n');
+                
+                for (const line of lines) {
+    if (!line.startsWith('data: ')) continue;
+
+    try {
+        // 1. Get the string after "data: "
+        const rawJson = line.slice(6); 
+        
+        // 2. Turn that string back into a JavaScript object
+        const data = JSON.parse(rawJson); 
+        
+        // 3. ONLY append the actual text property
+        if (data.text) {
+            output.innerText += data.text; 
+        }
+    } catch (e) {
+        // If it's not JSON (like an empty heart-beat), just ignore it
+        console.log("Skipping non-JSON line");
+    }
+}
+            }
+        }
+    </script>
+</body>
+</html>

@@ -597,9 +597,27 @@ Integrated `thread_id` into all API calls to ensure the agent can maintain isola
 | `http://localhost:8000/chat/{id}` | **DELETE** | Wipes the entire memory for a specific user ID. |
 | `http://localhost:8001/agent/playground` | **GET** | Opens the visual UI to watch the agent execute graph nodes. |
 
+
+## 📅 Day 27: Token Streaming & SSE
+
+
+**Goal:** Today I solved the "Long Wait" problem. Instead of making users wait for the entire AI completion, I implemented **Server-Sent Events (SSE)** to stream tokens in real-time.
+
+### 🛠️ Technical Implementation
+* **FastAPI `StreamingResponse`**: Configured the API to hold an open connection using the `text/event-stream` media type.
+* **`astream_events` (v2)**: Leveraged LangGraph's event-driven streaming to filter for `on_chat_model_stream` events, ensuring only raw LLM content is sent to the UI.
+* **Asynchronous Generators**: Used `async for` and `yield` to push data chunks without blocking the server.
+
+* **Backend**: Used `astream_events(version="v2")` to intercept LLM tokens. 
+* **Data Extraction**: Handled Gemini's multimodal chunk format (`[{'text': '...'}]`) by extracting the raw string in the FastAPI generator.
+* **Protocol**: Implemented Server-Sent Events (SSE) with `StreamingResponse`.
+* **Frontend**: Built a JavaScript consumer that uses `fetch`, `Reader`, and `JSON.parse` to decode and append text chunks to the UI dynamically.
+
+### 🚀 Results
+* **TTFT (Time to First Token)**: Reduced from ~5-10 seconds to <200ms.
+* **UX**: Added a smooth, character-by-character typing experience.
+
 ---
-
-
 
 
 Developed by **Makarand Thorat**
