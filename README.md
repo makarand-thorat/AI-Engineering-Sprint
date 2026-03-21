@@ -617,6 +617,27 @@ Integrated `thread_id` into all API calls to ensure the agent can maintain isola
 * **TTFT (Time to First Token)**: Reduced from ~5-10 seconds to <200ms.
 * **UX**: Added a smooth, character-by-character typing experience.
 
+
+## 📅 Day 28: Capstone Part 1 — Autonomous Researcher & Email Drafter
+
+**Goal:** Today I kicked off the Final Capstone Project. I transitioned from a basic chatbot to a functional **Autonomous Agent** that can browse the live web, research companies, and draft personalized outreach emails.
+
+### 🛠️ Technical Implementation
+* **Manual ReAct Graph**: Built a custom state machine from scratch using **LangGraph**, avoiding high-level abstractions to gain full control over the "Reasoning + Acting" cycle.
+* **Tool Binding**: Integrated **DuckDuckGo Search** directly into the Gemini 1.5 Flash model using `.bind_tools()`, allowing the LLM to autonomously decide when it needs external data.
+* **Stateful Messaging**: Implemented `MessagesState` with `add_messages` to ensure the agent "remembers" its research findings while drafting the final email.
+* **Conditional Routing**: Created a `should_continue` logic gate that inspects LLM outputs for `tool_calls` and routes the flow between the "Brain" (Model) and the "Hands" (Tools).
+
+### 🔍 Core Components
+* **The Brain (`call_model`)**: Injected a specialized `SystemMessage` to define the agent's persona as a Corporate Researcher, ensuring it follows a "Research → Analyze → Draft" workflow.
+* **The Hands (`call_tool`)**: Developed a manual execution node that iterates through LLM-generated search queries, fetches live 2026 data, and returns `ToolMessage` objects to the graph.
+* **Streaming Feedback**: Enhanced the FastAPI backend to yield `on_tool_start` events, allowing the UI to show a "🔍 Searching..." status indicator during web latency.
+* **FastAPI Integration**: Separated the core agent logic (`agent.py`) from the delivery layer (`main.py`) for a professional, modular architecture.
+
+### 🚀 Results
+* **Autonomy**: The agent successfully researches topics it wasn't trained on (e.g., NVIDIA's 2026 Rubin architecture) and synthesizes them into context-aware emails.
+* **Efficiency**: Reduced a 15-minute manual research task into a <15-second automated workflow.
+* **Reliability**: By using a manual graph, I eliminated "looping" bugs and ensured the agent always returns to the user with a final answer.
 ---
 
 
