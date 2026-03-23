@@ -638,6 +638,27 @@ Integrated `thread_id` into all API calls to ensure the agent can maintain isola
 * **Autonomy**: The agent successfully researches topics it wasn't trained on (e.g., NVIDIA's 2026 Rubin architecture) and synthesizes them into context-aware emails.
 * **Efficiency**: Reduced a 15-minute manual research task into a <15-second automated workflow.
 * **Reliability**: By using a manual graph, I eliminated "looping" bugs and ensured the agent always returns to the user with a final answer.
+
+## 📅 Day 29: Capstone Part 2 — Production UI, FastAPI Streaming & AI Auditor
+
+**Goal:** Today I finalized the Capstone by building a professional-grade frontend and a secondary "Auditor" agent. I transitioned from a basic HTML interface to a **Reactive Streamlit Dashboard** that features real-time token streaming and an automated quality guardrail system.
+
+### 🛠️ Technical Implementation
+* **Reactive Frontend**: Built a multi-component UI using **Streamlit**, implementing `st.chat_message` and `st.empty` to handle live-streaming text blocks directly from the backend.
+* **Server-Sent Events (SSE)**: Optimized the **FastAPI** layer to process generator-based responses, allowing the UI to "type out" the agent's research results in real-time rather than waiting for a full buffer.
+* **Dual-Agent Architecture**: Implemented a "Judge-on-the-Side" pattern where a second LLM instance evaluates the first agent's output for **Fact Density** and **Professionalism** scores.
+* **Defensive JSON Parsing**: Developed a robust "No-Regex" cleaning logic using `.find()` and `.rfind()` to extract structured data from LLM responses, ensuring the UI never crashes on "chatty" AI outputs.
+
+### 🔍 Core Components
+* **The Cockpit (`app_ui.py`)**: Designed a dashboard with a persistent **Sidebar Report Card**, providing users with instant transparency into the agent's performance metrics (1-10 scale).
+* **The Auditor (`evaluate_output`)**: Engineered a specialized evaluation function that operates at `temperature=0.1` to provide objective, consistent grading of partnership emails.
+* **Streaming Logic**: Used `requests.post(stream=True)` to bridge the gap between the FastAPI `/chat` endpoint and the Streamlit frontend, maintaining a low-latency user experience.
+* **Safety Guardrails**: Integrated a "Security Block" check that identifies non-corporate or high-risk prompts (like "hacking"), preventing the agent from executing tools on malicious intent.
+
+### 🚀 Results
+* **Production Quality**: Created a decoupled architecture (Frontend/Backend) that mimics real-world AI software deployments.
+* **Self-Correction**: The "Agent Report Card" successfully identifies when research is thin, flagging drafts that need more specific "SMART" goals before being sent.
+* **Resilience**: The system successfully handles complex JSON outputs and "Silent Failures," providing clear `st.error` or `st.warning` messages instead of crashing.
 ---
 
 
