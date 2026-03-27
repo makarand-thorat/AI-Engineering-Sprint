@@ -635,7 +635,7 @@ Integrated `thread_id` into all API calls to ensure the agent can maintain isola
 * **FastAPI Integration**: Separated the core agent logic (`agent.py`) from the delivery layer (`main.py`) for a professional, modular architecture.
 
 ### 🚀 Results
-* **Autonomy**: The agent successfully researches topics it wasn't trained on (e.g., NVIDIA's 2026 Rubin architecture) and synthesizes them into context-aware emails.
+* **Autonomy**: The agent successfully researches topics it wasn't trained on (e.g., NVIDIA's 2026 Rubin architecture) and synthesizes them into context-aware emails
 * **Efficiency**: Reduced a 15-minute manual research task into a <15-second automated workflow.
 * **Reliability**: By using a manual graph, I eliminated "looping" bugs and ensured the agent always returns to the user with a final answer.
 
